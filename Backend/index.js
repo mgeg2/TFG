@@ -1,13 +1,10 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const indexRoutes = require('./routes/IndexRoutes');  // Importar las rutas generales
+var {config,routes} = require('./config.js')
+app.use(express.json());
+app.use(routes.API, indexRoutes);  // Aquí usamos el archivo de rutas general
 
-app.get('/', (req, res) => {
-  res.send('¡Hola, Mundo!');
-});
-app.get('/api', (req, res) => {
-  res.send('¡Hola, API!');});
-
-app.listen(port, () => {
-  console.log(`Servidor corriendo en http://localhost:${port}`);
+app.listen(config.PORT, () => {
+  console.log(`Servidor corriendo en http://localhost:${config.PORT}`);
 });
